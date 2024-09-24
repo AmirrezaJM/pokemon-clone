@@ -1,28 +1,13 @@
-export interface pokemonResult {
-    id: number,
+export interface PokemonData {
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: SinglePokmonResult[]
+}
+
+export interface SinglePokmonResult {
     name: string,
-    sprites: pokemonSprite,
-    types: pokemonTypes[],
-    weight: number,
-    height: number
+    url: string
 }
 
-export interface pokemonTypes {
-    slot?: number,
-    type: pokemonInnerType
-}
-
-export interface pokemonSprite {
-    back_default: string,
-    front_shiny: string,
-    front_default: string
-}
-
-export interface pokemonInnerType {
-    name: string,
-    url?: string
-}
-
-export interface pokemonListResponse {
-    results: Array<{name: string, url: string}>
-}
+export interface 

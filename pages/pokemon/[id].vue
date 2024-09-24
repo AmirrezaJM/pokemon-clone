@@ -1,17 +1,7 @@
 <template>
-    <UContainer class="grid">
-      <pre>
-        {{  response }}
-      </pre>
-    </UContainer>
+  <div>
+    <h1 class="text-center my-3 text-lg font-semibold">
+      Show the List of characters in pokemon world
+    </h1>
+  </div>
 </template>
-
-<script setup lang="ts">
-import type { pokemonResult } from '~/types/pokemon';
-
-const router = useParam();
-const { data: response } = await useFetch<pokemonResult>(`https://pokeapi.co/api/v2/pokemon/${router}`);
-
-// -- Functions
-
-</script>

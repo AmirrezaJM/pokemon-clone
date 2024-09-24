@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     exposeConfig: true,
   },
+  ssr: false,
   app: {
     head: {
       bodyAttrs: {

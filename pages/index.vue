@@ -1,35 +1,89 @@
 <template>
-  <main class="h-screen w-screen">
-    <UContainer v-if="!error">
-      <h1 class="text-xl font-semibold text-gray-200 text-center py-4">
-        There are all the pokemon characters
+  <main>
+    <UContainer>
+      <h1 class="text-center my-3 text-lg font-semibold">
+        Show the List of characters in pokemon world
       </h1>
-
-      <div v-if="status === 'pending'">
-        Loading ...
-      </div>
-      <div v-else>
-        <PokemonCardList :number-of-pokemon="getLengthOfPokemonList" />
-        <PokemonPagination />
-      </div>
+      <!-- ------------------------------- -->
+      <PokemonList :pokemonList="pokemonCharacters" />
     </UContainer>
-
-    <UContainer v-else>
-      Something is went wrong!
-    </UContainer>
-    
   </main>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
+import type { PokemonData } from "~/types/pokemon";
 
-import type { pokemonListResponse } from '~/types/pokemon';
+// ! fix the issue
+const pokemonResults: any = ref([]);
+const pokemonCharacters = ref([]);
+const offset = ref(0);
 
+onMounted(() => {
+  getAllData();
+});
 
-const {data: response, error, status} = await useLazyFetch<pokemonListResponse>('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
+watchEffect(() => {
+  console.log(pokemonCharacters)
+  EndOfThePage();
+});
+
 
 // -- Functions
-const getLengthOfPokemonList = computed(() => {
-  return response.value?.results.length || 0;
-});
+async function getAllData() {
+  const { data: response, error } = await useFetch<PokemonData>(
+    `https://pokeapi.co/api/v2/pokemon?offset=${offset.value}&limit=20`
+  );
+
+
+  if (error.value) {
+    console.error("Error fetching initial data:", error.value);
+    return;
+  }
+
+  if (response.value?.results) {
+    pokemonResults.value = response.value.results;
+    await fetchAllPokemonData(pokemonResults.value);
+  }
+}
+
+async function fetchAllPokemonData(
+  pokemonList: { name: string; url: string }[]
+) {
+  for (const pokemon of pokemonList) {
+    await fetchPokemonData(pokemon);
+  }
+}
+
+async function fetchPokemonData(pokemon: { name: string; url: string }) {
+  const { data: response, error } = await useFetch(pokemon.url);
+
+  if (error.value) {
+    console.error("Failed to fetch Pokémon data:", error.value);
+    return;
+  }
+  if (response.value) {
+    pokemonCharacters.value.push(response.value);
+  }
+}
+
+function EndOfThePage() {
+  window.onscroll = async () => {
+    let bottomOfWindow =
+      Math.abs(
+        Math.max(
+          window.pageYOffset,
+          document.documentElement.scrollTop,
+          document.body.scrollTop
+        ) +
+          window.innerHeight -
+          document.documentElement.offsetHeight
+      ) < 1;
+
+    if (bottomOfWindow) {
+      offset.value += 20;
+      await getAllData();
+    }
+  };
+}
 </script>
