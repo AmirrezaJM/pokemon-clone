@@ -1,7 +1,22 @@
 <template>
   <div>
-    <h1 class="text-center my-3 text-lg font-semibold">
-      Show the List of characters in pokemon world
-    </h1>
+    
   </div>
 </template>
+
+<script setup lang="ts">
+const route = useRoute()
+const router = useRouter()
+
+
+
+async function getSinglePokemonData() {
+  const {data:response} = await useFetch(`https://pokeapi.co/api/v2/pokemon/${route.params}`)
+  return response
+}
+
+</script>
+
+<style scoped>
+
+</style>

@@ -1,11 +1,8 @@
 <template>
-  <main>
+  <main class="pt-28">
     <UContainer>
-      <h1 class="text-center my-3 text-lg font-semibold">
-        Show the List of characters in pokemon world
-      </h1>
       <!-- ------------------------------- -->
-      <PokemonList :pokemonList="pokemonCharacters" />
+      <PokemonList :pokemonList="pokemonCharacters" :isCardloaded="statusPokemonData" />
     </UContainer>
   </main>
 </template>
@@ -15,8 +12,9 @@ import { ref, onMounted } from "vue";
 import type { PokemonData } from "~/types/pokemon";
 
 // ! fix the issue
-const pokemonResults: any = ref([]);
-const pokemonCharacters = ref([]);
+const pokemonResults = ref<any[]>([]);
+const pokemonCharacters = ref<any[]>([]);
+const statusPokemonData = ref<any>('')
 const offset = ref(0);
 
 onMounted(() => {
@@ -24,17 +22,17 @@ onMounted(() => {
 });
 
 watchEffect(() => {
-  console.log(pokemonCharacters)
   EndOfThePage();
 });
 
 
 // -- Functions
 async function getAllData() {
-  const { data: response, error } = await useFetch<PokemonData>(
+  const { data: response, error, status } = await useFetch<PokemonData>(
     `https://pokeapi.co/api/v2/pokemon?offset=${offset.value}&limit=20`
   );
 
+  statusPokemonData.value = status
 
   if (error.value) {
     console.error("Error fetching initial data:", error.value);
@@ -56,7 +54,9 @@ async function fetchAllPokemonData(
 }
 
 async function fetchPokemonData(pokemon: { name: string; url: string }) {
-  const { data: response, error } = await useFetch(pokemon.url);
+  const { data: response, error } = await useFetch('/api/SinglePokemon', {
+    params: {url: pokemon.url}
+  });
 
   if (error.value) {
     console.error("Failed to fetch Pokémon data:", error.value);
