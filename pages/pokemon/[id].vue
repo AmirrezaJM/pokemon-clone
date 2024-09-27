@@ -9,6 +9,8 @@ const route = useRoute()
 const router = useRouter()
 
 
+// onMounted()
+
 
 async function getSinglePokemonData() {
   const {data:response} = await useFetch(`https://pokeapi.co/api/v2/pokemon/${route.params}`)
