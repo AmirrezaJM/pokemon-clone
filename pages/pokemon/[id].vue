@@ -1,19 +1,29 @@
 <template>
-  <div>
-    
-  </div>
+  <main class="pt-28">
+    <h1>Hello world</h1>
+    <pre>
+      {{ singlePokemonCard }}
+    </pre>
+
+  </main>
 </template>
 
 <script setup lang="ts">
 const route = useRoute()
-const router = useRouter()
+
+const singlePokemonCard = ref<any>({})
 
 
-// onMounted()
+onMounted(() => {
+  getSinglePokemonData()
+})
 
 
+
+// -- functions
 async function getSinglePokemonData() {
-  const {data:response} = await useFetch(`https://pokeapi.co/api/v2/pokemon/${route.params}`)
+  const response = await $fetch(`https://pokeapi.co/api/v2/pokemon/${route.params.id}`)
+  singlePokemonCard.value = response
   return response
 }
 
