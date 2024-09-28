@@ -1,8 +1,30 @@
 <template>
   <div>
-    <UCard v-if="isloaded" :ui="UCardStyle">
+    <!-- ------------------ -->
+    <UCard
+      v-if="isloaded"
+      :ui="UCardStyle"
+      :class="{
+        'ring-grass/25 dark:ring-grass/25': singleType.hasGrass,
+        'ring-fire/25 dark:ring-fire/25': singleType.hasFire,
+        'ring-bug/25 dark:ring-bug/25': singleType.hasBug,
+        'ring-water/25 dark:ring-water/25': singleType.hasWater,
+        'ring-poison/25 dark:ring-poison/25': singleType.hasPoison,
+        'ring-normal/25 dark:ring-normal/25': singleType.hasNormal,
+      }"
+    >
       <template #header>
-        <div class="w-4 h-4 rounded-2xl bg-green-400"></div>
+        <div
+          class="w-4 h-4 rounded-2xl"
+          :class="{
+            'bg-grass': singleType.hasGrass,
+            'bg-fire': singleType.hasFire,
+            'bg-bug': singleType.hasBug,
+            'bg-water': singleType.hasWater,
+            'bg-poison': singleType.hasPoison,
+            'bg-normal': singleType.hasNormal,
+          }"
+        ></div>
       </template>
 
       <div class="flex flex-row justify-center">
@@ -14,22 +36,26 @@
       </div>
 
       <template #footer>
-        <p
-          class="text-xl font-bold text-center text-white dark:text-gray-200 py-2"
-        >
+        <p class="text-xl font-bold text-center text-primaryAccent-500 py-2">
           {{ name }}
         </p>
         <div class="flex flex-row justify-between items-center">
           <div class="flex flex-col items-center">
-            <span class="text-base font-medium text-neutral-300">Weight</span>
-            <span class="text-base font-bold text-white">{{ weight }} kg</span>
+            <span class="text-base font-medium text-white">Weight</span>
+            <span class="text-base font-bold text-secondaryAccent-300"
+              >{{ weight }} kg</span
+            >
           </div>
           <div class="flex flex-col items-center">
-            <span class="text-base font-medium text-neutral-300">Height</span>
-            <span class="text-base font-bold text-white">{{ height }} m</span>
+            <span class="text-base font-medium text-white">Height</span>
+            <span class="text-base font-bold text-secondaryAccent-300"
+              >{{ height }} m</span
+            >
           </div>
         </div>
-        <div class="my-2 flex justify-center items-center font-semibold">
+        <div
+          class="my-2 flex justify-center items-center font-semibold text-white dark:text-gray-200"
+        >
           <span>Type:</span>
           <div v-for="(types, index) in allTypes" :key="index">
             <span class="mx-1">{{ types.type.name }}</span>
@@ -39,6 +65,7 @@
       </template>
     </UCard>
 
+    <!-- ------------------ -->
     <UCard v-else :ui="UCardStyle">
       <template #header>
         <USkeleton :ui="{ base: 'h-4 w-4', rounded: 'rounded-2xl' }" />
@@ -69,12 +96,24 @@
         </div>
       </template>
     </UCard>
-
   </div>
 </template>
 
 <script setup lang="ts">
 import type { PokemonTypes } from "~/types/pokemon";
+
+const getSingleType = ref<string | undefined>("");
+
+const singleType = reactive({
+  hasFire: false,
+  hasWater: false,
+  hasBug: false,
+  hasGrass: false,
+  hasPoison: false,
+  hasNormal: false,
+});
+
+// const SingleType = ref<any>('')
 
 interface Props {
   name: string;
@@ -82,11 +121,42 @@ interface Props {
   height: number;
   image: string;
   allTypes: PokemonTypes[];
-  isloaded: any;
+  isloaded: boolean;
 }
 
 const { name, weight, height, image, allTypes, isloaded } =
   defineProps<Props>();
+
+onMounted(() => {
+  typeStatus();
+});
+
+function typeStatus() {
+  const allTypesList = allTypes.map((types) => types.type.name);
+  getSingleType.value = allTypesList.find((element) => element);
+  switch (getSingleType.value) {
+    case "grass":
+      singleType.hasGrass = true;
+      break;
+    case "water":
+      singleType.hasWater = true;
+      break;
+    case "bug":
+      singleType.hasBug = true;
+      break;
+    case "fire":
+      singleType.hasFire = true;
+      break;
+    case "poison":
+      singleType.hasPoison = true;
+      break;
+    case "normal":
+      singleType.hasNormal = true;
+      break;
+    default:
+      break;
+  }
+}
 
 // -- Styles
 const UCardStyle = reactive({
@@ -94,7 +164,7 @@ const UCardStyle = reactive({
   background:
     "bg-gradient-to-b from-neutral-900/85 to-neutral-950/95 hover:scale-90 transition-transform",
   divide: "",
-  ring: "ring-1 ring-green-800 dark:ring-gray-800",
+  ring: "ring-1",
   rounded: "rounded-lg",
   shadow: "shadow",
   body: {
@@ -113,4 +183,11 @@ const UCardStyle = reactive({
 });
 </script>
 
-<style scoped></style>
+<!-- :class="{
+  'bg-grass': singleType.hasGrass,
+  'bg-fire': singleType.hasFire,
+  'bg-bug': singleType.hasBug,
+  'bg-water': singleType.hasWater,
+  'bg-poison': singleType.hasPoison,
+  'bg-normal': singleType.hasNormal,
+}" -->
