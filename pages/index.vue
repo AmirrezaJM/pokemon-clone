@@ -3,6 +3,7 @@
     <UContainer>
       <!-- ------------------------------- -->
       <PokemonList :pokemonList="pokemonCharacters" :isCardloaded="statusPokemonData" />
+
     </UContainer>
   </main>
 </template>
@@ -66,6 +67,8 @@ async function fetchPokemonData(pokemon: { name: string; url: string }) {
     pokemonCharacters.value.push(response.value);
   }
 }
+
+// -- Computed Functions
 
 function EndOfThePage() {
   window.onscroll = async () => {

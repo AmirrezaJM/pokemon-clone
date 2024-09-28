@@ -10,7 +10,10 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts'
   ],
   tailwindcss: {
-    exposeConfig: true,
+    configPath: 'tailwind.config.ts',
+    exposeConfig: {
+      level: 2
+    },
   },
   ssr: false,
   app: {
@@ -22,6 +25,10 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     }
+  },
+  colorMode: {
+    preference: 'dark', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
   },
   css: ["~/assets/css/main.css"],
   googleFonts: {

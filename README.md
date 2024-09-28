@@ -1,11 +1,11 @@
 ## About Project
 A user-friendly pokemon app that provides all pokemon's characters with their detail info, also ability of switch between dark and light mode
 
-## Table of Contents
+<!-- ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
+- [License](#license) -->
 
 
 ## Prerequisites

@@ -11,6 +11,7 @@
             :weight="singleCharacter.weight"
             :all-types="singleCharacter.types"
             :isloaded="isCardloaded"
+            :showTypeStatus="showTypeStatus"
           />
         </NuxtLink>
       </div>
@@ -19,5 +20,5 @@
 </template>
 
 <script setup lang="ts">
-const { pokemonList, isCardloaded } = defineProps(["pokemonList",'isCardloaded']);
+const { pokemonList, isCardloaded, showTypeStatus } = defineProps(["pokemonList",'isCardloaded','showTypeStatus']);
 </script>
