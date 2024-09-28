@@ -1,10 +1,27 @@
-# Nuxt 3 Minimal Starter
+## About Project
+A user-friendly pokemon app that provides all pokemon's characters with their detail info, also ability of switch between dark and light mode
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Setup
 
-Make sure to install the dependencies:
+## Prerequisites
+- Node.js 20.x or higher
+- Nuxt.js 3.13.x or higher
+
+
+
+## Installation
+1. Clone the repository:
+
+git clone https://github.com/AmirrezaJM/pokemon-clone.git
+
+cd WeatherForecastApp
+
+2. Install dependencies
 
 ```bash
 # npm
@@ -13,63 +30,19 @@ npm install
 # pnpm
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
 ```
-
-## Development Server
+3. Start the Project
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
+#npm
 npm run dev
 
-# pnpm
+#pnpm
 pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## License
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+This project is licensed under the MIT License
