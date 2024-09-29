@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       bodyAttrs: {
-        style: "background-color: #1E1B1B;",
+        class: "bg-[#F5F5F5] dark:bg-[#1E1B1B]"
       },
       title: "Pokemon",
       charset: 'utf-8',

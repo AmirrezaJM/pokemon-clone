@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { darkMode } from "#tailwind-config";
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
@@ -34,6 +33,11 @@ export default <Partial<Config>>{
         bug: "#A1591A",
         normal: "#FEEB9F",
         poison: "#A584CE",
+        electric: "#FFFF33",
+        rocky: "#2D2C2C",
+        fighting: "#8B5D5A",
+        ghost: "#C5CDD8",
+        fairy: "#F4BDC9"
       },
     },
   },

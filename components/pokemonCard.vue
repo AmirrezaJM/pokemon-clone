@@ -5,12 +5,21 @@
       v-if="isloaded"
       :ui="UCardStyle"
       :class="{
-        'ring-grass/25 dark:ring-grass/25': singleType.hasGrass,
-        'ring-fire/25 dark:ring-fire/25': singleType.hasFire,
-        'ring-bug/25 dark:ring-bug/25': singleType.hasBug,
-        'ring-water/25 dark:ring-water/25': singleType.hasWater,
-        'ring-poison/25 dark:ring-poison/25': singleType.hasPoison,
-        'ring-normal/25 dark:ring-normal/25': singleType.hasNormal,
+        'ring-grass/25 bg-grass/25 dark:ring-grass/25': singleType.hasGrass,
+        'ring-fire/25 bg-fire/25 dark:ring-fire/25': singleType.hasFire,
+        'ring-bug/25 bg-bug/25 dark:ring-bug/25': singleType.hasBug,
+        'ring-water/25 bg-water/25 dark:ring-water/25': singleType.hasWater,
+        'ring-poison/25 bg-poison/25 dark:ring-poison/25': singleType.hasPoison,
+        'ring-normal/25 bg-normal/25 dark:ring-normal/25':
+          singleType.hasNormal || singleType.hasGround,
+        'ring-electric/25 bg-electric/25 dark:ring-electric/25':
+          singleType.hasElectric,
+        'ring-fairy/25 bg-fairy/25 dark:ring-fairy/25': singleType.hasFairy,
+        'ring-rocky/25 bg-rocky/25 dark:ring-rocky/25': singleType.hasRock,
+        'ring-fighting/25 bg-fighting/25 dark:ring-fighting/25':
+          singleType.hasFighting,
+        'ring-ghost/25 bg-ghost/25 dark:ring-ghost/25': singleType.hasGhost,
+        'ring-ice/25 bg-ice/25 dark:ring-ice/25': singleType.hasIce,
       }"
     >
       <template #header>
@@ -22,7 +31,13 @@
             'bg-bug': singleType.hasBug,
             'bg-water': singleType.hasWater,
             'bg-poison': singleType.hasPoison,
-            'bg-normal': singleType.hasNormal,
+            'bg-normal': singleType.hasNormal || singleType.hasGround,
+            'bg-electric': singleType.hasElectric,
+            'bg-fairy': singleType.hasFairy,
+            'bg-rocky': singleType.hasRock,
+            'bg-fighting': singleType.hasFighting,
+            'bg-ghost': singleType.hasGhost,
+            'bg-ice': singleType.hasIce,
           }"
         ></div>
       </template>
@@ -36,7 +51,7 @@
       </div>
 
       <template #footer>
-        <p class="text-xl font-bold text-center text-primaryAccent-500 py-2">
+        <p class="text-xl font-semibold text-center text-primaryAccent-200 py-2">
           {{ name }}
         </p>
         <div class="flex flex-row justify-between items-center">
@@ -111,6 +126,13 @@ const singleType = reactive({
   hasGrass: false,
   hasPoison: false,
   hasNormal: false,
+  hasElectric: false,
+  hasRock: false,
+  hasGround: false,
+  hasFighting: false,
+  hasGhost: false,
+  hasFairy: false,
+  hasIce: false,
 });
 
 // const SingleType = ref<any>('')
@@ -153,6 +175,27 @@ function typeStatus() {
     case "normal":
       singleType.hasNormal = true;
       break;
+    case "ground":
+      singleType.hasGround = true;
+      break;
+    case "rock":
+      singleType.hasRock = true;
+      break;
+    case "electric":
+      singleType.hasElectric = true;
+      break;
+    case "fighting":
+      singleType.hasFighting = true;
+      break;
+    case "fairy":
+      singleType.hasFairy = true;
+      break;
+    case "Ice":
+      singleType.hasIce = true;
+      break;
+    case "ghost":
+      singleType.hasGhost = true;
+      break;
     default:
       break;
   }
@@ -162,7 +205,7 @@ function typeStatus() {
 const UCardStyle = reactive({
   base: "py-2 !px-1",
   background:
-    "bg-gradient-to-b from-neutral-900/85 to-neutral-950/95 hover:scale-90 transition-transform",
+    "bg-gradient-to-b from-neutral-900/70 to-neutral-950/75 hover:scale-90 transition-transform",
   divide: "",
   ring: "ring-1",
   rounded: "rounded-lg",
