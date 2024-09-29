@@ -5,21 +5,21 @@
       v-if="isloaded"
       :ui="UCardStyle"
       :class="{
-        'ring-grass/25 bg-grass/25 dark:ring-grass/25': singleType.hasGrass,
-        'ring-fire/25 bg-fire/25 dark:ring-fire/25': singleType.hasFire,
-        'ring-bug/25 bg-bug/25 dark:ring-bug/25': singleType.hasBug,
-        'ring-water/25 bg-water/25 dark:ring-water/25': singleType.hasWater,
-        'ring-poison/25 bg-poison/25 dark:ring-poison/25': singleType.hasPoison,
-        'ring-normal/25 bg-normal/25 dark:ring-normal/25':
+        'ring-grass/50 bg-grass/50 dark:ring-grass/50': singleType.hasGrass,
+        'ring-fire/50 bg-fire/50 dark:ring-fire/50': singleType.hasFire,
+        'ring-bug/50 bg-bug/50 dark:ring-bug/50': singleType.hasBug,
+        'ring-water/50 bg-water/50 dark:ring-water/50': singleType.hasWater,
+        'ring-poison/50 bg-poison/50 dark:ring-poison/50': singleType.hasPoison,
+        'ring-normal/50 bg-normal/50 dark:ring-normal/50':
           singleType.hasNormal || singleType.hasGround,
-        'ring-electric/25 bg-electric/25 dark:ring-electric/25':
+        'ring-electric/50 bg-electric/50 dark:ring-electric/50':
           singleType.hasElectric,
-        'ring-fairy/25 bg-fairy/25 dark:ring-fairy/25': singleType.hasFairy,
-        'ring-rocky/25 bg-rocky/25 dark:ring-rocky/25': singleType.hasRock,
-        'ring-fighting/25 bg-fighting/25 dark:ring-fighting/25':
+        'ring-fairy/50 bg-fairy/50 dark:ring-fairy/50': singleType.hasFairy,
+        'ring-rocky/50 bg-rocky/50 dark:ring-rocky/50': singleType.hasRock,
+        'ring-fighting/50 bg-fighting/50 dark:ring-fighting/50':
           singleType.hasFighting,
-        'ring-ghost/25 bg-ghost/25 dark:ring-ghost/25': singleType.hasGhost,
-        'ring-ice/25 bg-ice/25 dark:ring-ice/25': singleType.hasIce,
+        'ring-ghost/50 bg-ghost/50 dark:ring-ghost/50': singleType.hasGhost,
+        'ring-ice/50 bg-ice/50 dark:ring-ice/50': singleType.hasIce,
       }"
     >
       <template #header>
@@ -71,7 +71,7 @@
         <div
           class="my-2 flex justify-center items-center font-semibold text-white dark:text-gray-200"
         >
-          <span>Type:</span>
+          <span>Power:</span>
           <div v-for="(types, index) in allTypes" :key="index">
             <span class="mx-1">{{ types.type.name }}</span>
             <span class="mr-1" v-if="index < allTypes.length - 1"> - </span>
@@ -190,7 +190,7 @@ function typeStatus() {
     case "fairy":
       singleType.hasFairy = true;
       break;
-    case "Ice":
+    case "ice":
       singleType.hasIce = true;
       break;
     case "ghost":
@@ -225,12 +225,3 @@ const UCardStyle = reactive({
   },
 });
 </script>
-
-<!-- :class="{
-  'bg-grass': singleType.hasGrass,
-  'bg-fire': singleType.hasFire,
-  'bg-bug': singleType.hasBug,
-  'bg-water': singleType.hasWater,
-  'bg-poison': singleType.hasPoison,
-  'bg-normal': singleType.hasNormal,
-}" -->

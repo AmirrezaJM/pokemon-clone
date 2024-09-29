@@ -5,6 +5,10 @@ import defaultTheme from "tailwindcss/defaultTheme";
 export default <Partial<Config>>{
   theme: {
     extend: {
+      flex: {
+        '2': '2 1 0',
+        '7': '7 1 0',
+      },
       colors: {
         primaryAccent: {
           100: "#FFF7D2",
