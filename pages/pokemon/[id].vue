@@ -13,10 +13,10 @@
         </section>
         <section class="flex-1">
           <UTabs :ui="UItabStyle" :items="items">
-            <template #about="{ item }">
+            <template #about>
               <SinglePokemonInfo title="Abilities">
-                <div v-for="(type, index) in showAllTypes" :key="index">
-                  <span class="text-sm px-6 py-1 rounded-md shadow-xl mx-2">{{ type }}</span>
+                <div v-for="(ability,index) in showAbilities" :key="index">
+                  <span class="text-sm px-6 py-1 rounded-md shadow-xl mx-2">{{ ability }}</span>
                 </div>
               </SinglePokemonInfo>
               <SinglePokemonInfo title="Story">
@@ -57,7 +57,7 @@
               <SinglePokemonInfo class="mt-6" title="stats">
                 <div
                   class="contents"
-                  v-for="(singleStat, index) in getstats"
+                  v-for="(singleStat, index) in getStats"
                   :key="index"
                 >
                   <div class="flex my-2 w-full items-center justify-center">
@@ -67,42 +67,15 @@
                     <span class="flex-1 text-xs mx-4 font-semibold dark:text-white/90"
                       >{{singleStat.base_stat}}</span
                     >
-                    <UProgress class="flex-7" size="sm" :value="singleStat.base_stat" />
+                    <UProgress class="flex-7" size="sm" :value="singleStat.base_stat" :color="getColor(singleStat.base_stat)"/>
                   </div>
                 </div>
               </SinglePokemonInfo>
             </template>
 
-            <template #moves="{ item }">
-              <UCard @submit.prevent="">
-                <template #header>
-                  <h3
-                    class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
-                  >
-                    {{ item.label }}
-                  </h3>
-                  <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                    Change your password here. After saving, you'll be logged
-                    out.
-                  </p>
-                </template>
-
-                <UFormGroup
-                  label="Current Password"
-                  name="current"
-                  required
-                  class="mb-3"
-                >
-                  <UInput type="password" required />
-                </UFormGroup>
-                <UFormGroup label="New Password" name="new" required>
-                  <UInput type="password" required />
-                </UFormGroup>
-
-                <template #footer>
-                  <UButton type="submit" color="black"> Save password </UButton>
-                </template>
-              </UCard>
+            <template #moves>
+              <h1>Hello</h1>
+            
             </template>
           </UTabs>
         </section>
@@ -126,11 +99,19 @@ const items = [
   },
 ];
 
+
 onMounted(() => {
   getSinglePokemonData();
 });
 
+
 // -- Computed
+const showAbilities = computed(() => {
+  const abilities =  singlePokemonCard.value.abilities || [];
+  const abilitiesNames =  abilities.map((item: {ability: {name: string}}) => item.ability.name);
+  return abilitiesNames;
+});
+
 const showAllTypes = computed(() => {
   const types = singlePokemonCard.value.types || [];
   const typeNames = types.map(
@@ -162,7 +143,7 @@ const getName = computed(() => {
   return name;
 });
 
-const getstats = computed(() => {
+const getStats = computed(() => {
   const stats = singlePokemonCard.value.stats || [];
   return stats;
 });
@@ -176,6 +157,8 @@ const getID = computed(() => {
   const id = singlePokemonCard.value.id || 0;
   return String(id).padStart(3, '0');
 })
+
+
 
 // -- Style
 const UItabStyle = reactive({
@@ -218,4 +201,14 @@ async function getSinglePokemonData() {
   singlePokemonCard.value = response;
   return response;
 }
+
+function getColor(number: number): any {
+  switch (true) {
+    case number <= 25: return 'red'
+    case number <= 50: return 'orange'
+    case number <= 80: return 'yellow'
+    default: return 'green'
+  }
+}
+
 </script>
