@@ -42,8 +42,8 @@ export default defineNuxtConfig({
       'xl': 1280,
       'xxl': 1536,
       '2xl': 1536
-    },
-  }
+    }
+  },
   colorMode: {
     preference: "dark", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found
