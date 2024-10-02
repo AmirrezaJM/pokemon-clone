@@ -2,7 +2,7 @@
     <header class="shadow-lg m-0 p-4 fixed top-0 z-10 bg-[#F5F5F5] dark:bg-[#1E1B1B] w-full">
         <UContainer :ui="{base: 'flex items-center justify-between'}">
             <NuxtLink to="/">
-                <img class="outline-none w-auto h-10" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/640px-International_Pok%C3%A9mon_logo.svg.png"/>
+                <NuxtImg placeholder class="outline-none w-auto h-10" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/640px-International_Pok%C3%A9mon_logo.svg.png"/>
             </NuxtLink>
             <h1 class="text-center text-lg font-semibold text-primaryAccent-800 dark:text-primaryAccent-300">
                 Let's see characters in pokemon world

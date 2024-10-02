@@ -8,7 +8,7 @@
             <span class="text-xl text-neutral-800/40 dark:text-neutral-300/40"> # {{ getID }} </span>
           </div>
           <div class="flex justify-center">
-            <img class="w-3/4" :src="getImage" alt="medium" />
+            <NuxtImg placeholder class="w-3/4" :src="getImage" alt="medium" />
           </div>
         </section>
         <section class="flex-1">
@@ -74,8 +74,10 @@
             </template>
 
             <template #moves>
-              <h1>Hello</h1>
-            
+              <h2 class="text-base text-semibold text-center"> List of all the moves </h2>
+              <div v-for="(singleMove,index) in getMoves" :key="index">
+                {{ singleMove.move.name }}
+              </div>
             </template>
           </UTabs>
         </section>
@@ -112,14 +114,6 @@ const showAbilities = computed(() => {
   return abilitiesNames;
 });
 
-// const showAllTypes = computed(() => {
-//   const types = singlePokemonCard.value.types || [];
-//   const typeNames = types.map(
-//     (singleType: { type: { name: string } }) => singleType.type.name
-//   );
-//   return typeNames;
-// });
-
 const showAllVersions = computed(() => {
   const versions = singlePokemonCard.value.game_indices || [];
   const versionNames = versions.map(
@@ -150,7 +144,7 @@ const getStats = computed(() => {
 
 const getImage = computed(() => {
   const image = singlePokemonCard.value.sprites?.front_default || "";
-  return image
+  return image;
 })
 
 const getID = computed(() => {
@@ -158,6 +152,11 @@ const getID = computed(() => {
   return String(id).padStart(3, '0');
 })
 
+
+const getMoves = computed(() => {
+  const allmoves = singlePokemonCard.value.moves || 0;
+  return allmoves; 
+})
 
 
 // -- Style
@@ -201,7 +200,6 @@ async function getSinglePokemonData() {
   singlePokemonCard.value = response;
   return response;
 }
-
 
 
 function getColor(number: number): any {

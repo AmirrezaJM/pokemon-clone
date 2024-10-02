@@ -2,19 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: [
-    "@nuxt/ui",
-    "@pinia/nuxt",
-    "pinia-plugin-persistedstate/nuxt",
-    "@nuxt/image",
-  ],
-  tailwindcss: {
-    configPath: "tailwind.config.ts",
-    exposeConfig: {
-      level: 2,
-    },
-  },
-  ssr: false,
   app: {
     head: {
       bodyAttrs: {
@@ -32,9 +19,34 @@ export default defineNuxtConfig({
       ],
     },
   },
+  modules: [
+    "@nuxt/ui",
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@nuxt/image",
+  ],
+  css: ["~/assets/css/main.css"],
+  tailwindcss: {
+    configPath: "tailwind.config.ts",
+    exposeConfig: {
+      level: 2,
+    },
+  },
+  ssr: false,
+  image: {
+    screens: {
+      'xs': 320,
+      'sm': 640,
+      'md': 768,
+      'lg': 1024,
+      'xl': 1280,
+      'xxl': 1536,
+      '2xl': 1536
+    },
+  }
   colorMode: {
     preference: "dark", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found
   },
-  css: ["~/assets/css/main.css"],
+
 });

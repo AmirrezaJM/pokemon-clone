@@ -43,10 +43,11 @@
       </template>
 
       <div class="flex flex-row justify-center">
-        <img
+        <NuxtImg
           class="bg-gradient-to-b shadow-lg from-neutral-500/60 bg-transparent w-2/4 h-2/4 mx-auto rounded-full"
           :src="image"
           alt="test"
+          placeholder
         />
       </div>
 
