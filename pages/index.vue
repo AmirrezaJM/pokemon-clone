@@ -55,7 +55,7 @@ async function fetchAllPokemonData(
 }
 
 async function fetchPokemonData(pokemon: { name: string; url: string }) {
-  const { data: response, error } = await useFetch('/api/SinglePokemon', {
+  const { data: response, error } = await useFetch('/api/AllPokemon', {
     params: {url: pokemon.url}
   });
 

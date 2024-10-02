@@ -112,13 +112,13 @@ const showAbilities = computed(() => {
   return abilitiesNames;
 });
 
-const showAllTypes = computed(() => {
-  const types = singlePokemonCard.value.types || [];
-  const typeNames = types.map(
-    (singleType: { type: { name: string } }) => singleType.type.name
-  );
-  return typeNames;
-});
+// const showAllTypes = computed(() => {
+//   const types = singlePokemonCard.value.types || [];
+//   const typeNames = types.map(
+//     (singleType: { type: { name: string } }) => singleType.type.name
+//   );
+//   return typeNames;
+// });
 
 const showAllVersions = computed(() => {
   const versions = singlePokemonCard.value.game_indices || [];
@@ -201,6 +201,8 @@ async function getSinglePokemonData() {
   singlePokemonCard.value = response;
   return response;
 }
+
+
 
 function getColor(number: number): any {
   switch (true) {
